@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <link rel="icon" href="img/Favicon.ico" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+    <meta charset="UTF-8">
+    <title>Fortnite </title>
+</head>
+
+<body>
+    <!------ navbar------------->
+    <div id="app">
+        <div class="container2">
+            <header v-bind:class="selectClass"></header>
+            <nav class="navbar navbar-inverse" style="margin:0px;">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Fortine Tournament</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav list">
+                            <li>
+                                <a v-on:click="makeActive('index')"><i class="fa fa-fw fa-home"></i>Home</a></li>
+                            <li class="dropdown">
+
+
+                            </li>
+                            <li><a v-on:click="makeActive('info2')"><i class="fas fa-info"></i>
+
+                                    info</a></li>
+                            <li><a v-on:click="makeActive('chat')" id="login"><i class="fas fa-comment"></i>
+
+                                    chat</a></li>
+                            <li><a v-on:click="makeActive('calendar')"><i class="fas fa-calendar-alt"></i>
+
+                                    calendar</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a  v-on:click="makeActive('player')"><i class="fas fa-bullseye"></i> player</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!------------------end navbar---------------->
+
+            <div class="index contaneir" v-show="active=='index'" id="index">
+
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="img/torneo.jpg" alt="torneo1">
+                        </div>
+
+                        <div class="item">
+                            <img src="img/torneo%202.jpg" alt="torneo2">
+                        </div>
+
+                        <div class="item">
+                            <img src="img/torneo3.jpg" alt="torneo3">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Pr evious</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!------------------------- end  slide show----------------------------->
+                <div class="icone">
+
+
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('next')"><img src="img/nextgame.png" class="submenu"> next </a></div>
+                    <div class="p-2 my-flex-item"> <a v-on:click="makeActive('last')"><img src="img/nextgame.png" class="submenu"> last</a></div>
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('standing')"><img src="img/ranking.png" class="submenu"> ranking </a></div>
+                    <div class="p-2 my-flex-item"><a href="https://www.twitch.tv/directory/game/Fortnite"><img src="img/twitch.png" class="submenu">twich </a></div>
+
+                </div>
+            </div>
+            <div class="container " v-show="active=='next'" id="nextgame">
+                <div class="contaneir">
+                <div class="games-schedule-items">
+                <div class="row games-team">
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[0].picture1"  alt="ninja">
+                        <span>ninja</span>
+                    </div>
+                    <div class="col-md-5">
+                        <h4 class="img-circle">VS</h4>
+                    </div>
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[0].picture2" alt="mirko">
+                        <span>mirko</span>
+                    </div>
+                </div>
+                <div class="row games-info">
+                    <div class="col-md-12">
+                        <p><span class="glyphicon glyphicon-play-circle"></span> {{match[0].date}} <small>15:30 local | 09:30 GMT</small>)</p>
+                        <p class="games-dash"></p>
+                        <p><small>Mirpur Internation Stadium, Dhaka</small></p>
+                    </div>
+                </div>
+            </div>  
+
+                   
+                </div>
+
+                <!------------------------- end  slide show----------------------------->
+
+                <div class="icone">
+
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('next')"><img src="img/nextgame.png" class="submenu"> next </a></div>
+                    <div class="p-2 my-flex-item"> <a v-on:click="makeActive('last')"><img src="img/nextgame.png" class="submenu"> last</a></div>
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('standing')"><img src="img/ranking.png" class="submenu"> ranking </a></div>
+                    <div class="p-2 my-flex-item"><a href="https://www.twitch.tv/directory/game/Fortnite"><img src="img/twitch.png" class="submenu">twich </a></div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="container 2 " v-show="active=='last'" id="last">
+
+            <div class="index contaneir">
+
+
+                <div class="index contaneir">
+                <div class="games-schedule-items">
+                <div class="row games-team">
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[1].picture1"  alt="ninja">
+                        <span>ninja</span>
+                    </div>
+                    <div class="col-md-5">
+                        <h4 class="img-circle">VS</h4>
+                    </div>
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[1].picture2" alt="mirko">
+                        <span>mirko</span>
+                    </div>
+                </div>
+                <div class="row games-info">
+                    <div class="col-md-12">
+                        <p><span class="glyphicon glyphicon-play-circle"></span> {{match[0].date}} <small>15:30 local | 09:30 GMT</small>)</p>
+                        <p class="games-dash"></p>
+                        <p><small>Mirpur Internation Stadium, Dhaka</small></p>
+                    </div>
+                </div>
+            </div>  
+
+                   
+                </div>
+                <!------------------------- end  slide show----------------------------->
+
+                <div class="icone">
+
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('next')"><img src="img/nextgame.png" class="submenu"> next </a></div>
+                    <div class="p-2 my-flex-item"> <a v-on:click="makeActive('last')"><img src="img/nextgame.png" class="submenu"> last</a></div>
+                    <div class="p-2 my-flex-item"><a v-on:click="makeActive('standing')"><img src="img/ranking.png" class="submenu"> ranking </a></div>
+                    <div class="p-2 my-flex-item"><a href="https://www.twitch.tv/directory/game/Fortnite"><img src="img/twitch.png" class="submenu">twich </a></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="container2 info2" v-show="active=='info2'">
+            <div class="contaneir ">
+                <h1 class="title">fortnite rule</h1>
+                <p>le regole sono molto semplice è un gioco battle royal l' ultimo che resta in piedi vince </p>
+                <h2 class="title"> Come si svolge il torneo</h2>
+                <p>il torneo si svolge in modo virtuale i giocatori possono disporre di una chatroom per eventuali comunicazioni</p>
+                <div>
+                    <img class="map element" src="img/mappa.jpg">
+                    <p> Il giocatore avrà a disposizione tutta la mappa e un tempo limite 50 minuti.Ogni 10 minuti la mappa si andrà rimpicciolendo sempre di più se rimani fuori dal area principale troppo tempo sei morto </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="container2" id="ranking"></div>
+
+
+        <!----------------contenitore chat ----------------------------------------------------------->
+
+
+
+        <div class="container2" v-show="active=='chat'" id="chat">
+
+            <!------ login ------->
+
+            <div class="chat">
+                <div id="posts" class="box container">
+                    Loading posts...
+                </div>
+                <div class="messaging fixed-bottom">
+                    <div class="inputs">
+                        <input id="textInput" class="input" type="text" placeholder="Your message...">
+                    </div>
+                    <div class="send" id="create-post">
+                        <i class="fas fa-plane-departure planes"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div v-show="active=='player'" id="players" class="responsive">
+            <div class="pcard1, container" v-for="player, i in players">
+                <div class="border1">
+                    <div class="roundNumber">
+                        <span class="number">{{i+1}}</span>
+
+                    </div>
+                    <a v-on:click= "selectedPlayer = player; makeActive('profile1')"> <img class="img-responsive" v-bind:src="player.picture" alt=""></a>
+
+                
+
+                </div>
+            </div>
+            
+           
+
+        </div>
+
+        <div class="ptext responsive" v-if="active=='profile1'" style="background-color:black">
+        <h1>{{selectedPlayer.name}}</h1>
+    <p>{{selectedPlayer.nick}}</p>
+<img class="img-responsive" v-bind:src="selectedPlayer.picture"  alt="">            
+ <p class="text-sm-left"> {{selectedPlayer.facts}}</p>
+            <p>{{selectedPlayer.mentalage}}</p>
+ </div>
+
+
+            
+            
+       
+        <!---------- standing------------->
+
+
+        <div v-show="active=='standing'" id="standings">
+            <span>GOD TIER</span>
+
+            <div class="stan1, container" v-for="player, i in players">
+                <div class="stanBorder">
+                    <div class="roundNumber">
+                        <span class="number">{{i+1}}</span>
+
+                    </div>
+
+                    <div class="ppicture1">
+                        <img class="img-responsive" v-bind:src="player.characterpicture" alt="">
+                    </div>
+
+
+
+                    <div class="ptext responsive">
+                        <span id="pinfo1">
+                            Points
+                        </span>
+                        <span id="pinfo2">
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+<div v-show="active=='calendar'">
+    
+    
+    
+    <div   class="row">
+    <div class="col-md-4 games-schedule">
+        <div class="well">
+            <div class="games-schedule-title">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Todays Games</h5>
+                    </div>
+                </div>
+            </div>                
+            <div class="games-schedule-items">
+                <div class="row games-team">
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[0].picture1"  alt="ninja">
+                        <span>ninja</span>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="img-circle">VS</h4>
+                    </div>
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[0].picture2" alt="mirko">
+                        <span>mirko</span>
+                    </div>
+                </div>
+                <div class="row games-info">
+                    <div class="col-md-12">
+                        <p><span class="glyphicon glyphicon-play-circle"></span> {{match[0].date}} <small>15:30 local | 09:30 GMT</small>)</p>
+                        <p class="games-dash"></p>
+                        <p><small>Mirpur Internation Stadium, Dhaka</small></p>
+                    </div>
+                </div>
+            </div>  
+            <div class="games-schedule-items">
+                <div class="row games-team">
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[1].picture1" alt="ciccio">
+                        <span>ciccio</span>
+                    </div>
+                    <div class="col-md-2">
+                        <h4 class="img-circle">VS</h4>
+                    </div>
+                    <div class="col-md-5">
+                        <img id ="cerchio" class="img-responsive" :src="match[1].picture2" alt="mario">
+                        <span>mario</span>
+                    </div>
+                </div>
+                <div class="row games-info">
+                    <div class="col-md-12">
+                        <p><span class="glyphicon glyphicon-play-circle"></span> {{match[1].date}}<small>19:30 local | 13:30 GMT</small>)</p>
+                        <p class="games-dash"></p>
+                        <p><small>Fahtullah Internation Stadium, Narayanganj</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="games-schedule-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-right">&COPY; bootstrap.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+    
+</div>
+
+    </div>
+
+    <!---------------------------configurazione firebase--------------------------------->
+
+    <script src="data.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD3DMsFg_aca2ccCXaqCVPUDJHweM0RzEQ",
+    authDomain: "fortnite-65683.firebaseapp.com",
+    databaseURL: "https://fortnite-65683.firebaseio.com",
+    projectId: "fortnite-65683",
+    storageBucket: "fortnite-65683.appspot.com",
+    messagingSenderId: "814920848570"
+  };
+  firebase.initializeApp(config);
+</script>
+
+    <!--
+    
+-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="vue.js"></script>
+    <script src="chat.js"></script>
+
+    <script src="navbar.js"></script>
+</body>
+
+</html>
